@@ -8,17 +8,29 @@ import java.time.Duration;
 
 
 public class LoginPage {
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement usernamefield = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name")));
-        usernamefield.sendKeys("standard_user");
-        WebElement passwordfield = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password")));
-        passwordfield.sendKeys("secret_sauce");
-        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button")));
-        loginButton.click();
-        driver.quit();
+    
+        public WebDriver driver;
+        By usernameField = By.id("user-name");
+        By passwordField = By.id("password");
+        By loginButton = By.id("login-button");
+
+        public LoginPage(WebDriver driver) {
+            this.driver = driver;
+        }
+
+        public void enterUsername(String username) {
+            driver.findElement(usernameField).sendKeys(username);
+        }
+
+        public void enterPassword(String password) {
+            driver.findElement(passwordField).sendKeys(password);
+        }
+
+        public void clickLoginButton() {
+            driver.findElement(loginButton).click();
+        }
+
+        
     }
     
-}
+
